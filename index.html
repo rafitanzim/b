@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Live HTML Editor</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+	<style>body{
+
+background-color:white;
+
+} 
+		
+		#editor { 
+			height: 500px; 
+			width: 100%; 
+		}
+	</style>
+</head>
+<body>
+	<h1>Live HTML Editor</h1>
+	<p>Type your HTML code below:</p>
+	<div id="editor"></div>
+	<center><button onclick="runCode()">Run</button></center>
+	<div id="result"></div>
+	<script>
+		var editor = ace.edit("editor");
+		editor.setTheme("ace/theme/cobalt");
+		editor.getSession().setMode("ace/mode/html");
+		
+		function runCode() {
+			var code = editor.getValue();
+			var iframe = document.createElement('iframe');
+			iframe.setAttribute('id', 'resultFrame');
+			iframe.setAttribute('width', '100%');
+			iframe.setAttribute('height', '500px');
+			document.getElementById('result').innerHTML = '';
+			document.getElementById('result').appendChild(iframe);
+			iframe.contentWindow.document.open();
+			iframe.contentWindow.document.write(code);
+			iframe.contentWindow.document.close();
+		}
+	</script>
+    
+</body>
+</html>
